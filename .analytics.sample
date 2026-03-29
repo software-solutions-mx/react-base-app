@@ -1,0 +1,105 @@
+# Analytics Credentials & Accounts Template
+# Copy required values to:
+# - Frontend (Vite): .env.local (project root, not /src)
+# - Backend (Rails): your server secret manager / ENV
+#
+# Never commit real credentials.
+
+## ─────────────────────────────────────────────────────────────
+## 1) FRONTEND ENV PLACEHOLDERS (VITE)
+## ─────────────────────────────────────────────────────────────
+
+# Google Tag Manager
+VITE_GTM_ID=GTM-XXXXXXX
+
+# Google Analytics 4 (for GTM variable references and QA checks)
+VITE_GA4_ID=G-XXXXXXXXXX
+
+# Optional: Google Search Console verification code (if using meta-tag method)
+VITE_GSC_VERIFICATION_CODE=google-site-verification-placeholder
+
+# Optional debug flag
+VITE_ANALYTICS_DEBUG=false
+
+
+## ─────────────────────────────────────────────────────────────
+## 2) BACKEND ENV PLACEHOLDERS (RAILS/API)
+## ─────────────────────────────────────────────────────────────
+
+# GA4 Measurement Protocol
+GA4_MEASUREMENT_ID=G-XXXXXXXXXX
+GA4_API_SECRET=ga4_api_secret_placeholder
+
+# Optional export/integration placeholders
+GA4_BIGQUERY_PROJECT_ID=bigquery_project_id_placeholder
+GA4_BIGQUERY_DATASET=bigquery_dataset_placeholder
+
+
+## ─────────────────────────────────────────────────────────────
+## 3) ACCOUNT INVENTORY & ACCESS CHECKLIST
+## ─────────────────────────────────────────────────────────────
+
+### Google Tag Manager (GTM)
+GTM_ACCOUNT_NAME=COMPANY_NAME_PLACEHOLDER
+GTM_ACCOUNT_ID=ACCOUNT_ID_PLACEHOLDER
+GTM_CONTAINER_NAME=WEBSITE_CONTAINER_PLACEHOLDER
+GTM_CONTAINER_ID=GTM-XXXXXXX
+GTM_WORKSPACE_NAME=DEFAULT_OR_PROD_WORKSPACE
+GTM_USER_EMAILS_WITH_PUBLISH_ACCESS=user1@example.com,user2@example.com
+
+### Google Analytics 4 (GA4)
+GA4_ACCOUNT_NAME=ACCOUNT_NAME_PLACEHOLDER
+GA4_PROPERTY_NAME=PROPERTY_NAME_PLACEHOLDER
+GA4_PROPERTY_ID=PROPERTY_ID_PLACEHOLDER
+GA4_WEB_DATA_STREAM_NAME=WEB_STREAM_PLACEHOLDER
+GA4_MEASUREMENT_ID_PRIMARY=G-XXXXXXXXXX
+GA4_MEASUREMENT_ID_STAGING=G-YYYYYYYYYY
+GA4_ADMIN_EMAILS=analytics-admin@example.com
+
+### Google Search Console (GSC)
+GSC_PROPERTY_URL=https://your-domain.com
+GSC_VERIFICATION_METHOD=DNS_OR_HTML_TAG
+GSC_VERIFICATION_TOKEN=verification_token_placeholder
+GSC_OWNER_EMAILS=seo-owner@example.com
+
+### Google Tag Assistant / QA
+TAG_ASSISTANT_QA_EMAIL=qa@example.com
+
+### Looker Studio (Reporting)
+LOOKER_STUDIO_WORKSPACE_URL=https://lookerstudio.google.com/
+LOOKER_STUDIO_REPORT_OWNER_EMAIL=report-owner@example.com
+LOOKER_STUDIO_REPORT_URL=report_url_placeholder
+
+### Consent / CMP (if applicable)
+CMP_PROVIDER_NAME=OneTrust_or_Cookiebot_or_Custom
+CMP_ACCOUNT_ID=cmp_account_placeholder
+CMP_PUBLIC_KEY=cmp_public_key_placeholder
+
+### Optional marketing tools managed via GTM
+META_PIXEL_ID=meta_pixel_placeholder
+HOTJAR_SITE_ID=hotjar_site_id_placeholder
+MICROSOFT_CLARITY_ID=clarity_id_placeholder
+GOOGLE_ADS_CONVERSION_ID=google_ads_conversion_id_placeholder
+
+
+## ─────────────────────────────────────────────────────────────
+## 4) GTM CORE VARIABLES TO PREPARE
+## ─────────────────────────────────────────────────────────────
+
+GTM_VARIABLE_GA4_MEASUREMENT_ID=G-XXXXXXXXXX
+GTM_DLV_PAGE_PATH=pagePath
+GTM_DLV_EVENT_CATEGORY=eventCategory
+GTM_DLV_EVENT_LABEL=eventLabel
+GTM_DLV_USER_ID=userId
+
+
+## ─────────────────────────────────────────────────────────────
+## 5) OWNERSHIP / RESPONSIBILITIES
+## ─────────────────────────────────────────────────────────────
+
+ANALYTICS_OWNER_NAME=OWNER_NAME_PLACEHOLDER
+ANALYTICS_OWNER_EMAIL=owner@example.com
+SEO_OWNER_NAME=SEO_OWNER_PLACEHOLDER
+SEO_OWNER_EMAIL=seo@example.com
+DEV_OWNER_NAME=DEV_OWNER_PLACEHOLDER
+DEV_OWNER_EMAIL=dev@example.com

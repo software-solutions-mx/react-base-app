@@ -1,0 +1,46 @@
+# Deployment & Release Configuration Template
+# Copy this checklist to your internal secret manager.
+# Do not commit real credentials.
+
+## GitHub Environments to create
+# - staging  (QA + preview deployments)
+# - production
+
+## GitHub Environment Secrets (staging + production)
+# Required in BOTH environments unless noted otherwise.
+VERCEL_TOKEN=vercel_personal_or_team_token
+VERCEL_ORG_ID=team_or_user_org_id
+VERCEL_PROJECT_ID=project_id
+
+## GitHub Repo Settings
+# Actions > General > Workflow permissions
+# - Read and write permissions (required for semantic-release changelog commit/tag)
+
+## Vercel Project setup
+# Connect this repository to one Vercel project.
+# Environment variable groups:
+# - Preview (used by staging GitHub environment)
+# - Production
+#
+# Suggested frontend vars in Vercel:
+VITE_APP_ENV=staging_or_production
+VITE_SITE_URL=https://staging.example.com_or_https://example.com
+VITE_API_BASE_URL=/api
+VITE_TRANSLATION_URL=/locales/{{lng}}/{{ns}}.json
+VITE_GTM_ID=GTM-XXXXXXX
+VITE_GA4_ID=G-XXXXXXXXXX
+VITE_GSC_VERIFICATION_CODE=google-site-verification-placeholder
+VITE_ANALYTICS_DEBUG=false
+VITE_SENTRY_DSN=https://public_key@o0.ingest.sentry.io/0
+VITE_SENTRY_ENVIRONMENT=staging_or_production
+VITE_APP_VERSION=git_sha_or_semver
+VITE_SENTRY_TRACES_SAMPLE_RATE=0.1
+
+# Server-only vars for Vercel Functions (do NOT use VITE_ prefix):
+API_CLIENT_ID=server_client_id_placeholder
+API_CLIENT_SECRET=server_client_secret_placeholder
+API_BASE_URL=https://api.example.com
+
+## Optional domain hints
+STAGING_PUBLIC_URL=https://staging.example.com
+PRODUCTION_PUBLIC_URL=https://example.com

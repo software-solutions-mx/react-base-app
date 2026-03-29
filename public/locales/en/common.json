@@ -1,0 +1,10 @@
+{
+  "home": {
+    "title": "Welcome",
+    "message": "This is a basic i18n test page."
+  },
+  "actions": {
+    "switchToSpanish": "Switch to Spanish",
+    "switchToEnglish": "Switch to English"
+  }
+}

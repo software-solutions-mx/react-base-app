@@ -1,0 +1,15 @@
+# Error Monitoring / Sentry placeholders
+# Copy to .env.local and set real values in each environment.
+
+VITE_SENTRY_DSN=https://public_key@o0.ingest.sentry.io/0
+VITE_SENTRY_ENVIRONMENT=staging_or_production
+VITE_SENTRY_RELEASE=pro-life@x.y.z_or_git_sha
+VITE_SENTRY_TRACES_SAMPLE_RATE=0.1
+
+# GitHub Actions release automation placeholders
+# Add these in GitHub repository settings:
+# - Secret: SENTRY_AUTH_TOKEN
+# - Variables: SENTRY_ORG, SENTRY_PROJECT
+SENTRY_AUTH_TOKEN=sentry_auth_token_placeholder
+SENTRY_ORG=sentry_org_slug_placeholder
+SENTRY_PROJECT=sentry_project_slug_placeholder

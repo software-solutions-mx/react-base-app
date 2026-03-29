@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      window.dataLayer = window.dataLayer || []
+      function gtag() {
+        window.dataLayer.push(arguments)
+      }
+      gtag('consent', 'default', {
+        analytics_storage: 'denied',
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        wait_for_update: 500,
+      })
+    </script>
+    <script>
+      ;(function (w, d, s, l, i) {
+        if (!i || i === 'GTM-XXXXXXX') return
+        w[l] = w[l] || []
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' })
+        var f = d.getElementsByTagName(s)[0]
+        var j = d.createElement(s)
+        var dl = l !== 'dataLayer' ? '&l=' + l : ''
+        j.async = true
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl
+        f.parentNode.insertBefore(j, f)
+      })(window, document, 'script', 'dataLayer', '%VITE_GTM_ID%')
+    </script>
+    <title>Desarrollo de Software a la Medida en Mexico | Software Solutions</title>
+    <meta
+      name="description"
+      content="Software Solutions: desarrollamos aplicaciones web, sistemas empresariales y software personalizado para empresas en Mexico. Cotizacion sin costo."
+    />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://softwaresolutions.com.mx/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Software Solutions" />
+    <meta property="og:locale" content="es_MX" />
+    <meta
+      property="og:title"
+      content="Desarrollo de Software a la Medida en Mexico | Software Solutions"
+    />
+    <meta
+      property="og:description"
+      content="Software Solutions: desarrollamos aplicaciones web, sistemas empresariales y software personalizado para empresas en Mexico."
+    />
+    <meta property="og:url" content="https://softwaresolutions.com.mx/" />
+    <meta
+      property="og:image"
+      content="https://softwaresolutions.com.mx/og/og-default.svg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Desarrollo de Software a la Medida en Mexico | Software Solutions"
+    />
+    <meta
+      name="twitter:description"
+      content="Software Solutions: desarrollamos aplicaciones web, sistemas empresariales y software personalizado para empresas en Mexico."
+    />
+    <meta
+      name="twitter:image"
+      content="https://softwaresolutions.com.mx/og/og-default.svg"
+    />
+  </head>
+  <body>
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=%VITE_GTM_ID%"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe>
+    </noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

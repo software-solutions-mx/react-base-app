@@ -1,0 +1,10 @@
+{
+  "home": {
+    "title": "Bienvenido",
+    "message": "Esta es una pagina basica de prueba para i18n."
+  },
+  "actions": {
+    "switchToSpanish": "Cambiar a espanol",
+    "switchToEnglish": "Cambiar a ingles"
+  }
+}

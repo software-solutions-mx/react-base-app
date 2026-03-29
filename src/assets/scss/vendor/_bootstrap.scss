@@ -1,0 +1,31 @@
+@import 'bootstrap/scss/functions';
+
+/* Project-level Bootstrap token overrides (must be before component imports). */
+$primary: #aa3bff;
+$border-radius: 0.5rem;
+$enable-dark-mode: false;
+$enable-rounded: true;
+$enable-shadows: false;
+$enable-gradients: false;
+
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/variables-dark';
+@import 'bootstrap/scss/maps';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/root';
+
+/* Include only baseline + currently useful component styles. */
+@import 'bootstrap/scss/reboot';
+@import 'bootstrap/scss/type';
+@import 'bootstrap/scss/containers';
+@import 'bootstrap/scss/grid';
+@import 'bootstrap/scss/helpers';
+@import 'bootstrap/scss/utilities';
+@import 'bootstrap/scss/buttons';
+@import 'bootstrap/scss/forms';
+@import 'bootstrap/scss/navbar';
+@import 'bootstrap/scss/dropdown';
+@import 'bootstrap/scss/card';
+@import 'bootstrap/scss/modal';
+
+@import 'bootstrap/scss/utilities/api';

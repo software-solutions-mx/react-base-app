@@ -1,0 +1,132 @@
+name: Deploy (Vercel)
+
+on:
+  push:
+    branches:
+      - staging
+      - main
+      - master
+  workflow_dispatch:
+    inputs:
+      target:
+        description: Deployment target environment
+        required: true
+        default: staging
+        type: choice
+        options:
+          - staging
+          - production
+
+permissions:
+  contents: read
+
+jobs:
+  deploy-staging:
+    if: >
+      (github.event_name == 'push' && github.ref_name == 'staging') ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.target == 'staging' && github.ref_name == 'staging')
+    runs-on: ubuntu-latest
+    concurrency:
+      group: deploy-staging
+      cancel-in-progress: true
+    environment:
+      name: staging
+      url: ${{ steps.deploy.outputs.url }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate quality gates
+        run: npm run ci:check
+
+      - name: Pull Vercel project settings (preview runtime)
+        run: npx vercel pull --yes --environment=preview --token="${VERCEL_TOKEN}"
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+      - name: Build deployment artifacts
+        run: npx vercel build --token="${VERCEL_TOKEN}"
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          VITE_APP_VERSION: ${{ github.sha }}
+
+      - name: Deploy to Vercel (staging)
+        id: deploy
+        run: |
+          DEPLOYMENT_URL="$(npx vercel deploy --prebuilt --token="${VERCEL_TOKEN}")"
+          DEPLOYMENT_URL="$(echo "${DEPLOYMENT_URL}" | tail -n 1)"
+          echo "url=${DEPLOYMENT_URL}" >> "$GITHUB_OUTPUT"
+          echo "Staging deployment URL: ${DEPLOYMENT_URL}" >> "$GITHUB_STEP_SUMMARY"
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+  deploy-production:
+    if: >
+      (github.event_name == 'push' && (github.ref_name == 'main' || github.ref_name == 'master')) ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.target == 'production' && (github.ref_name == 'main' || github.ref_name == 'master'))
+    runs-on: ubuntu-latest
+    concurrency:
+      group: deploy-production
+      cancel-in-progress: true
+    environment:
+      name: production
+      url: ${{ steps.deploy.outputs.url }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate quality gates
+        run: npm run ci:check
+
+      - name: Pull Vercel project settings (production runtime)
+        run: npx vercel pull --yes --environment=production --token="${VERCEL_TOKEN}"
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+      - name: Build deployment artifacts
+        run: npx vercel build --prod --token="${VERCEL_TOKEN}"
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          VITE_APP_VERSION: ${{ github.sha }}
+
+      - name: Deploy to Vercel (production)
+        id: deploy
+        run: |
+          DEPLOYMENT_URL="$(npx vercel deploy --prebuilt --prod --token="${VERCEL_TOKEN}")"
+          DEPLOYMENT_URL="$(echo "${DEPLOYMENT_URL}" | tail -n 1)"
+          echo "url=${DEPLOYMENT_URL}" >> "$GITHUB_OUTPUT"
+          echo "Production deployment URL: ${DEPLOYMENT_URL}" >> "$GITHUB_STEP_SUMMARY"
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}

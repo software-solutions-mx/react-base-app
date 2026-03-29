@@ -1,0 +1,44 @@
+name: Sentry Release
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+jobs:
+  release:
+    if: ${{ vars.SENTRY_ORG != '' && vars.SENTRY_PROJECT != '' && secrets.SENTRY_AUTH_TOKEN != '' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build with sourcemaps
+        env:
+          VITE_SENTRY_RELEASE: ${{ github.sha }}
+        run: npm run build:sourcemap
+
+      - name: Create Sentry release and upload sourcemaps
+        uses: getsentry/action-release@v3
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: ${{ vars.SENTRY_ORG }}
+          SENTRY_PROJECT: ${{ vars.SENTRY_PROJECT }}
+        with:
+          environment: production
+          sourcemaps: ./dist/assets
+          version: ${{ github.sha }}
