@@ -31,9 +31,7 @@ function setMetaByName(name, content) {
 }
 
 function setMetaByProperty(property, content, suffix = '') {
-  const key = suffix
-    ? `meta:property:${property}:${suffix}`
-    : `meta:property:${property}`
+  const key = suffix ? `meta:property:${property}:${suffix}` : `meta:property:${property}`
 
   upsertHeadTag('meta', key, (node) => {
     node.setAttribute('property', property)
@@ -57,9 +55,11 @@ function setAlternateLink(hrefLang, href) {
 }
 
 function removeByPrefix(prefix) {
-  document.head.querySelectorAll(`[${SEO_KEY_ATTRIBUTE}^="${prefix}"]`).forEach((node) => {
-    node.remove()
-  })
+  document.head
+    .querySelectorAll(`[${SEO_KEY_ATTRIBUTE}^="${prefix}"]`)
+    .forEach((node) => {
+      node.remove()
+    })
 }
 
 function removeByKey(key) {

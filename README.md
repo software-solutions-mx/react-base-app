@@ -82,4 +82,5 @@ Reference placeholders:
   - `CHANGELOG.md` updates
   - GitHub Release notes
 - See `documents/DEPLOYMENT_RELEASE_PLAYBOOK.md` for setup checklist.
+
 # react-base-app

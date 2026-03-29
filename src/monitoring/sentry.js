@@ -11,8 +11,7 @@ import {
 
 const HAS_BUILD_SENTRY_DSN = Boolean(import.meta.env.VITE_SENTRY_DSN)
 const IS_SENTRY_CONFIGURED =
-  HAS_BUILD_SENTRY_DSN &&
-  typeof SENTRY_DSN === 'string' && SENTRY_DSN.trim().length > 0
+  HAS_BUILD_SENTRY_DSN && typeof SENTRY_DSN === 'string' && SENTRY_DSN.trim().length > 0
 
 let sentryModulePromise = null
 let hasInitializedSentry = false
