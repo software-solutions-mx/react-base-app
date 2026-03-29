@@ -1,4 +1,4 @@
-const DEFAULT_SITE_URL = 'https://softwaresolutions.com.mx'
+const DEFAULT_SITE_URL = 'https://goonline.com.mx'
 const DEFAULT_TRANSLATION_URL = '/locales/{{lng}}/{{ns}}.json'
 const DEFAULT_API_BASE_URL = '/api'
 const DEFAULT_SENTRY_TRACE_SAMPLE_RATE = 0.1

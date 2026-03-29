@@ -40,6 +40,13 @@ function setMetaByProperty(property, content, suffix = '') {
 }
 
 function setCanonical(url) {
+  document.head.querySelectorAll('link[rel="canonical"]').forEach((node) => {
+    const key = node.getAttribute(SEO_KEY_ATTRIBUTE)
+    if (key !== 'link:canonical') {
+      node.remove()
+    }
+  })
+
   upsertHeadTag('link', 'link:canonical', (node) => {
     node.setAttribute('rel', 'canonical')
     node.setAttribute('href', url)
