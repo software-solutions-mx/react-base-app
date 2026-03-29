@@ -19,7 +19,7 @@ function StateShowcasePage() {
         path={location.pathname}
         noindex
       />
-      <div className="py-4 d-flex flex-column gap-4">
+      <div className="state-showcase">
         <LoadingState />
         <EmptyState />
         <ErrorState />

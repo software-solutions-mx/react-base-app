@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet-async'
+import { useEffect, useMemo } from 'react'
 import { GSC_VERIFICATION_CODE } from '../../config/env'
 import { DEFAULT_LOCALE, getLocaleMeta } from '../../i18n/locales'
 import {
@@ -7,6 +7,66 @@ import {
   SITE_NAME,
   toAbsoluteUrl,
 } from '../../seo/siteConfig'
+
+const SEO_KEY_ATTRIBUTE = 'data-seo-key'
+
+function upsertHeadTag(tagName, key, applyAttributes) {
+  const selector = `${tagName}[${SEO_KEY_ATTRIBUTE}="${key}"]`
+  let node = document.head.querySelector(selector)
+
+  if (!node) {
+    node = document.createElement(tagName)
+    node.setAttribute(SEO_KEY_ATTRIBUTE, key)
+    document.head.appendChild(node)
+  }
+
+  applyAttributes(node)
+}
+
+function setMetaByName(name, content) {
+  upsertHeadTag('meta', `meta:name:${name}`, (node) => {
+    node.setAttribute('name', name)
+    node.setAttribute('content', content)
+  })
+}
+
+function setMetaByProperty(property, content, suffix = '') {
+  const key = suffix
+    ? `meta:property:${property}:${suffix}`
+    : `meta:property:${property}`
+
+  upsertHeadTag('meta', key, (node) => {
+    node.setAttribute('property', property)
+    node.setAttribute('content', content)
+  })
+}
+
+function setCanonical(url) {
+  upsertHeadTag('link', 'link:canonical', (node) => {
+    node.setAttribute('rel', 'canonical')
+    node.setAttribute('href', url)
+  })
+}
+
+function setAlternateLink(hrefLang, href) {
+  upsertHeadTag('link', `link:alternate:${hrefLang}`, (node) => {
+    node.setAttribute('rel', 'alternate')
+    node.setAttribute('hrefLang', hrefLang)
+    node.setAttribute('href', href)
+  })
+}
+
+function removeByPrefix(prefix) {
+  document.head.querySelectorAll(`[${SEO_KEY_ATTRIBUTE}^="${prefix}"]`).forEach((node) => {
+    node.remove()
+  })
+}
+
+function removeByKey(key) {
+  document.head.querySelectorAll(`[${SEO_KEY_ATTRIBUTE}="${key}"]`).forEach((node) => {
+    node.remove()
+  })
+}
 
 function SEOHead({
   title,
@@ -26,62 +86,82 @@ function SEOHead({
   const resolvedDescription = description ?? localeDefaults.description
   const resolvedOgImage = ogImage ?? localeDefaults.ogImage
   const canonicalUrl = toAbsoluteUrl(canonical ?? path)
-  const resolvedSchemas = Array.isArray(schema) ? schema : [schema]
+  const resolvedSchemas = useMemo(
+    () => (Array.isArray(schema) ? schema : [schema]),
+    [schema],
+  )
   const robotsContent = noindex ? 'noindex,nofollow' : 'index,follow'
   const googleSiteVerification = GSC_VERIFICATION_CODE
   const alternateUrls = getAlternateLocaleUrls(alternatePath ?? path)
 
-  return (
-    <Helmet prioritizeSeoTags>
-      <html lang={localeMeta.htmlLang} />
-      <title>{resolvedTitle}</title>
-      <meta name="description" content={resolvedDescription} />
-      <meta name="robots" content={robotsContent} />
-      <link rel="canonical" href={canonicalUrl} />
-      <link rel="alternate" hrefLang="x-default" href={alternateUrls.xDefault} />
-      {alternateUrls.links.map((link) => (
-        <link
-          key={link.locale}
-          rel="alternate"
-          hrefLang={link.hrefLang}
-          href={link.href}
-        />
-      ))}
+  useEffect(() => {
+    document.documentElement.lang = localeMeta.htmlLang
+    document.title = resolvedTitle
 
-      <meta property="og:type" content={ogType} />
-      <meta property="og:site_name" content={SITE_NAME} />
-      <meta property="og:locale" content={localeMeta.ogLocale} />
-      {alternateUrls.links
-        .filter((link) => link.locale !== locale)
-        .map((link) => (
-          <meta
-            key={link.locale}
-            property="og:locale:alternate"
-            content={link.ogLocale}
-          />
-        ))}
-      <meta property="og:title" content={resolvedTitle} />
-      <meta property="og:description" content={resolvedDescription} />
-      <meta property="og:url" content={canonicalUrl} />
-      <meta property="og:image" content={resolvedOgImage} />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
+    setMetaByName('description', resolvedDescription)
+    setMetaByName('robots', robotsContent)
+    setCanonical(canonicalUrl)
 
-      <meta name="twitter:card" content={localeDefaults.twitterCard} />
-      <meta name="twitter:title" content={resolvedTitle} />
-      <meta name="twitter:description" content={resolvedDescription} />
-      <meta name="twitter:image" content={resolvedOgImage} />
-      {googleSiteVerification ? (
-        <meta name="google-site-verification" content={googleSiteVerification} />
-      ) : null}
+    removeByPrefix('link:alternate:')
+    setAlternateLink('x-default', alternateUrls.xDefault)
+    alternateUrls.links.forEach((link) => {
+      setAlternateLink(link.hrefLang, link.href)
+    })
 
-      {resolvedSchemas.filter(Boolean).map((item, index) => (
-        <script key={index} type="application/ld+json">
-          {JSON.stringify(item)}
-        </script>
-      ))}
-    </Helmet>
-  )
+    setMetaByProperty('og:type', ogType)
+    setMetaByProperty('og:site_name', SITE_NAME)
+    setMetaByProperty('og:locale', localeMeta.ogLocale)
+    setMetaByProperty('og:title', resolvedTitle)
+    setMetaByProperty('og:description', resolvedDescription)
+    setMetaByProperty('og:url', canonicalUrl)
+    setMetaByProperty('og:image', resolvedOgImage)
+    setMetaByProperty('og:image:width', '1200')
+    setMetaByProperty('og:image:height', '630')
+
+    removeByPrefix('meta:property:og:locale:alternate:')
+    alternateUrls.links
+      .filter((link) => link.locale !== locale)
+      .forEach((link) => {
+        setMetaByProperty('og:locale:alternate', link.ogLocale, link.locale)
+      })
+
+    setMetaByName('twitter:card', localeDefaults.twitterCard)
+    setMetaByName('twitter:title', resolvedTitle)
+    setMetaByName('twitter:description', resolvedDescription)
+    setMetaByName('twitter:image', resolvedOgImage)
+
+    if (googleSiteVerification) {
+      setMetaByName('google-site-verification', googleSiteVerification)
+    } else {
+      removeByKey('meta:name:google-site-verification')
+    }
+
+    removeByPrefix('script:ldjson:')
+    resolvedSchemas.filter(Boolean).forEach((item, index) => {
+      upsertHeadTag('script', `script:ldjson:${index}`, (node) => {
+        node.setAttribute('type', 'application/ld+json')
+        node.textContent = JSON.stringify(item)
+      })
+    })
+  }, [
+    alternateUrls.links,
+    alternateUrls.xDefault,
+    canonicalUrl,
+    googleSiteVerification,
+    locale,
+    localeDefaults.twitterCard,
+    localeMeta.htmlLang,
+    localeMeta.ogLocale,
+    noindex,
+    ogType,
+    resolvedDescription,
+    resolvedOgImage,
+    resolvedSchemas,
+    resolvedTitle,
+    robotsContent,
+  ])
+
+  return null
 }
 
 export default SEOHead

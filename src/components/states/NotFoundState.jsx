@@ -9,7 +9,7 @@ function NotFoundState() {
       variant="warning"
       icon="signpost-split"
     >
-      <Link to="/" className="btn btn-outline-dark btn-sm">
+      <Link to="/" className="state-screen-action">
         Volver al inicio
       </Link>
     </StateScreen>

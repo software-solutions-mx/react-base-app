@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react'
-import { HelmetProvider } from 'react-helmet-async'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import App from './App'
 import { trackPageView } from './analytics'
@@ -18,11 +17,7 @@ describe('App', () => {
   })
 
   it('renders the main landmark', () => {
-    render(
-      <HelmetProvider>
-        <App />
-      </HelmetProvider>,
-    )
+    render(<App />)
 
     const mainLandmark = screen.getByRole('main', { name: /contenido principal/i })
     expect(mainLandmark).toBeInTheDocument()
@@ -31,11 +26,7 @@ describe('App', () => {
   })
 
   it('renders a skip link pointing to the main content region', () => {
-    render(
-      <HelmetProvider>
-        <App />
-      </HelmetProvider>,
-    )
+    render(<App />)
 
     expect(
       screen.getByRole('link', { name: /saltar al contenido principal/i }),
@@ -43,11 +34,7 @@ describe('App', () => {
   })
 
   it('tracks the initial page view once', () => {
-    render(
-      <HelmetProvider>
-        <App />
-      </HelmetProvider>,
-    )
+    render(<App />)
 
     expect(trackPageView).toHaveBeenCalledTimes(1)
     const [path, title] = trackPageView.mock.calls[0]

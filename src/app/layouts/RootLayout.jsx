@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Navigate, Outlet, useLocation, useParams } from 'react-router-dom'
 import { trackPageView } from '../../analytics'
 import SEOHead from '../../components/SEO/SEOHead'
+import { HELP_PHONE_LABEL, HELP_PHONE_URI } from '../../config/env'
 import { organizationSchema, websiteSchema } from '../../data/schemas'
 import i18n from '../../i18n/config'
 import { DEFAULT_LOCALE, isSupportedLocale, normalizeLocale } from '../../i18n/locales'
@@ -88,6 +89,12 @@ function RootLayout() {
       <footer aria-label="Pie del sitio">
         <span className="sr-only">Pie del sitio</span>
       </footer>
+      {HELP_PHONE_URI ? (
+        <a className="mobile-help-bar" href={HELP_PHONE_URI}>
+          <span className="mobile-help-bar-label">Ayuda inmediata</span>
+          <span className="mobile-help-bar-value">{HELP_PHONE_LABEL}</span>
+        </a>
+      ) : null}
       <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">
         {routeAnnouncement}
       </p>
