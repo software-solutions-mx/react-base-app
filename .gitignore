@@ -32,3 +32,4 @@ tmp
 # Keep this architecture guide trackable even with a global "Documents" ignore rule.
 !documents/
 !documents/react-i18n-architecture.md
+scripts/prerelease_check_results.json

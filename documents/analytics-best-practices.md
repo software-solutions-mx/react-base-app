@@ -67,6 +67,36 @@ Looker Studio dashboards
 
 Your React application **only ever writes to `window.dataLayer`**. It never calls `gtag()`, `fbq()`, or any third-party SDK directly. This is the abstraction that makes your analytics stack swappable.
 
+### Vercel Analytics Layer
+
+Use Vercel Analytics as a complementary telemetry layer for deployment-level metrics. Keep GA4/GTM as the source of truth for marketing and product events.
+
+For **Next.js** projects, use:
+
+```tsx
+import { Analytics } from "@vercel/analytics/next"
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>
+        {children}
+        <Analytics />
+      </body>
+    </html>
+  )
+}
+```
+
+For **React + Vite** projects (this repository), use:
+
+```jsx
+import { Analytics as VercelAnalytics } from '@vercel/analytics/react'
+
+// In src/main.jsx
+<VercelAnalytics />
+```
+
 ---
 
 ## 2. Google Tag Manager (GTM) — Install First
