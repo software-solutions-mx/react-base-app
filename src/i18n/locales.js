@@ -26,7 +26,11 @@ export const LOCALE_META = {
 }
 
 export function normalizeLocale(locale) {
-  return typeof locale === 'string' ? locale.toLowerCase() : DEFAULT_LOCALE
+  if (typeof locale !== 'string' || locale.length === 0) {
+    return DEFAULT_LOCALE
+  }
+
+  return locale.toLowerCase().split(/[-_]/)[0]
 }
 
 export function isSupportedLocale(locale) {

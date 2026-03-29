@@ -5,5 +5,161 @@
 }
 
 .app-content {
-  max-width: 720px;
+  width: min(100% - 2rem, 45rem);
+  margin-inline: auto;
+}
+
+.state-showcase {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem 0 2rem;
+}
+
+.state-screen {
+  padding: 1rem;
+}
+
+.state-screen-container {
+  width: min(100%, 44rem);
+  margin-inline: auto;
+}
+
+.state-screen-alert {
+  padding: 1rem;
+  background-color: #f7f6f8;
+  border: 1px solid #d7d4da;
+  border-radius: 0.875rem;
+  box-shadow: 0 8px 20px rgb(15 10 21 / 7%);
+}
+
+.state-screen-alert-danger {
+  background-color: #fff5f6;
+  border-color: #f7c2cb;
+}
+
+.state-screen-alert-warning {
+  background-color: #fffaf0;
+  border-color: #ffdca4;
+}
+
+.state-screen-alert-info {
+  background-color: #f2f8ff;
+  border-color: #bde4ff;
+}
+
+.state-screen-alert-secondary {
+  background-color: #f7f6f8;
+  border-color: #d7d4da;
+}
+
+.state-screen-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.state-screen-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  background-color: #1f1d24;
+  border-radius: 999px;
+}
+
+.state-screen-content {
+  width: 100%;
+}
+
+.state-screen-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  line-height: 1.25;
+}
+
+.state-screen-message {
+  margin: 0 0 0.75rem;
+}
+
+.state-screen-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.625rem 0.875rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1f1d24;
+  text-decoration: none;
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid #2c2a31;
+  border-radius: 0.625rem;
+}
+
+.state-screen-action:hover {
+  background-color: #f5f4f6;
+}
+
+.state-screen-action:focus-visible {
+  outline: 3px solid var(--app-primary);
+  outline-offset: 2px;
+}
+
+.mobile-help-bar {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  left: 1rem;
+  z-index: 1000;
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0.75rem 1rem;
+  color: #fff;
+  text-decoration: none;
+  background: linear-gradient(135deg, #8318d6 0%, #be47ff 100%);
+  border-radius: 999px;
+  box-shadow: 0 12px 30px rgb(104 16 163 / 38%);
+}
+
+.mobile-help-bar-label {
+  font-size: 0.85rem;
+  opacity: 0.95;
+}
+
+.mobile-help-bar-value {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+@media (width >= 48rem) {
+  .state-showcase {
+    gap: 1.25rem;
+    padding-top: 1.25rem;
+  }
+
+  .state-screen {
+    padding-inline: 1.25rem;
+  }
+
+  .state-screen-alert {
+    padding: 1.25rem;
+  }
+
+  .state-screen-row {
+    gap: 1rem;
+  }
+
+  .mobile-help-bar {
+    display: none;
+  }
 }

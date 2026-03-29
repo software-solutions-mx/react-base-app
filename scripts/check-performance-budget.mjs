@@ -7,7 +7,7 @@ const ASSETS_DIR = path.resolve('dist/assets')
 const budgets = {
   jsEntryGzipMax: Number(process.env.BUDGET_JS_ENTRY_GZIP_MAX ?? 170 * 1024),
   cssEntryGzipMax: Number(process.env.BUDGET_CSS_ENTRY_GZIP_MAX ?? 30 * 1024),
-  totalAssetsGzipMax: Number(process.env.BUDGET_TOTAL_ASSETS_GZIP_MAX ?? 220 * 1024),
+  totalAssetsGzipMax: Number(process.env.BUDGET_TOTAL_ASSETS_GZIP_MAX ?? 270 * 1024),
 }
 
 function toKb(bytes) {

@@ -1,18 +1,26 @@
 import { useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Navigate, Outlet, useLocation, useParams } from 'react-router-dom'
 import { trackPageView } from '../../analytics'
 import SEOHead from '../../components/SEO/SEOHead'
+import { HELP_PHONE_LABEL, HELP_PHONE_URI } from '../../config/env'
 import { organizationSchema, websiteSchema } from '../../data/schemas'
 import i18n from '../../i18n/config'
 import { DEFAULT_LOCALE, isSupportedLocale, normalizeLocale } from '../../i18n/locales'
 import { stripLocaleFromPath, toLocalizedPath } from '../../seo/siteConfig'
 
 function RootLayout() {
+  const { t } = useTranslation()
   const location = useLocation()
   const { locale } = useParams()
   const lastTrackedPathRef = useRef(null)
   const mainContentRef = useRef(null)
-  const normalizedLocale = locale ? normalizeLocale(locale) : DEFAULT_LOCALE
+  const detectedLocale = normalizeLocale(i18n.resolvedLanguage ?? i18n.language)
+  const normalizedLocale = locale
+    ? normalizeLocale(locale)
+    : isSupportedLocale(detectedLocale)
+      ? detectedLocale
+      : DEFAULT_LOCALE
   const hasLocalePrefix = typeof locale === 'string' && locale.length > 0
   const [routeAnnouncement, setRouteAnnouncement] = useState('')
 
@@ -40,16 +48,16 @@ function RootLayout() {
 
     mainContentRef.current.focus()
     const announcementTimeout = window.setTimeout(() => {
-      setRouteAnnouncement(document.title || 'Pagina actualizada')
+      setRouteAnnouncement(document.title || t('a11y.routeUpdated'))
     }, 0)
 
     return () => {
       window.clearTimeout(announcementTimeout)
     }
-  }, [location.pathname, location.search])
+  }, [location.pathname, location.search, t])
 
   if (hasLocalePrefix && !isSupportedLocale(normalizedLocale)) {
-    throw new Response('Locale not found', { status: 404 })
+    throw new Response(t('errors.notFound.message'), { status: 404 })
   }
 
   if (
@@ -72,22 +80,28 @@ function RootLayout() {
         schema={[organizationSchema, websiteSchema]}
       />
       <a className="skip-link" href="#main-content">
-        Saltar al contenido principal
+        {t('a11y.skipToMainContent')}
       </a>
-      <header aria-label="Encabezado del sitio">
-        <span className="sr-only">Encabezado del sitio</span>
+      <header aria-label={t('a11y.siteHeader')}>
+        <span className="sr-only">{t('a11y.siteHeader')}</span>
       </header>
       <main
         ref={mainContentRef}
         id="main-content"
         tabIndex={-1}
-        aria-label="Contenido principal"
+        aria-label={t('a11y.mainContent')}
       >
         <Outlet />
       </main>
-      <footer aria-label="Pie del sitio">
-        <span className="sr-only">Pie del sitio</span>
+      <footer aria-label={t('a11y.siteFooter')}>
+        <span className="sr-only">{t('a11y.siteFooter')}</span>
       </footer>
+      {HELP_PHONE_URI ? (
+        <a className="mobile-help-bar" href={HELP_PHONE_URI}>
+          <span className="mobile-help-bar-label">{t('help.immediate')}</span>
+          <span className="mobile-help-bar-value">{HELP_PHONE_LABEL}</span>
+        </a>
+      ) : null}
       <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">
         {routeAnnouncement}
       </p>

@@ -3,6 +3,7 @@ const DEFAULT_TRANSLATION_URL = '/locales/{{lng}}/{{ns}}.json'
 const DEFAULT_API_BASE_URL = '/api'
 const DEFAULT_SENTRY_TRACE_SAMPLE_RATE = 0.1
 const DEFAULT_APP_VERSION = 'local'
+const DEFAULT_HELP_PHONE = '911'
 const APP_ENV_VALUES = ['development', 'staging', 'production']
 
 function isValidHttpUrl(value) {
@@ -71,6 +72,7 @@ function loadEnv() {
   const sentryEnvironment = normalizeString(rawEnv.VITE_SENTRY_ENVIRONMENT)
   const sentryRelease = normalizeString(rawEnv.VITE_SENTRY_RELEASE)
   const sentryTracesSampleRate = toNumber(rawEnv.VITE_SENTRY_TRACES_SAMPLE_RATE)
+  const helpPhone = normalizeString(rawEnv.VITE_HELP_PHONE) ?? DEFAULT_HELP_PHONE
 
   if (!(apiBaseUrl.startsWith('/') || isValidHttpUrl(apiBaseUrl))) {
     errors.push(
@@ -115,6 +117,10 @@ function loadEnv() {
     errors.push('VITE_SENTRY_TRACES_SAMPLE_RATE: Must be a number between 0 and 1')
   }
 
+  if (helpPhone.length === 0) {
+    errors.push('VITE_HELP_PHONE: String must contain at least 1 character')
+  }
+
   if (errors.length > 0) {
     const details = errors.map((issue) => `  - ${issue}`).join('\n')
     throw new Error(`Invalid environment configuration:\n${details}`)
@@ -138,6 +144,7 @@ function loadEnv() {
     VITE_SENTRY_ENVIRONMENT: sentryEnvironment,
     VITE_SENTRY_RELEASE: sentryRelease,
     VITE_SENTRY_TRACES_SAMPLE_RATE: sentryTracesSampleRate,
+    VITE_HELP_PHONE: helpPhone,
   }
 }
 
@@ -162,3 +169,8 @@ export const SENTRY_ENVIRONMENT = env.VITE_SENTRY_ENVIRONMENT ?? APP_ENV
 export const SENTRY_RELEASE = env.VITE_SENTRY_RELEASE ?? DEFAULT_APP_VERSION
 export const SENTRY_TRACES_SAMPLE_RATE =
   env.VITE_SENTRY_TRACES_SAMPLE_RATE ?? DEFAULT_SENTRY_TRACE_SAMPLE_RATE
+export const HELP_PHONE = env.VITE_HELP_PHONE ?? DEFAULT_HELP_PHONE
+export const HELP_PHONE_URI = HELP_PHONE.startsWith('tel:')
+  ? HELP_PHONE
+  : `tel:${HELP_PHONE.replace(/\s+/g, '')}`
+export const HELP_PHONE_LABEL = HELP_PHONE_URI.replace(/^tel:/, '')

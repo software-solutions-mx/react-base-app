@@ -1,10 +1,13 @@
+import { useTranslation } from 'react-i18next'
 import StateScreen from './StateScreen'
 
-function ServerErrorState({ actionLabel, onAction }) {
+function ServerErrorState({ title, message, actionLabel, onAction }) {
+  const { t } = useTranslation()
+
   return (
     <StateScreen
-      title="Error interno del servidor"
-      message="Estamos trabajando para resolver el problema lo antes posible."
+      title={title ?? t('errors.server.title')}
+      message={message ?? t('errors.server.message')}
       variant="danger"
       icon="cpu"
       actionLabel={actionLabel}

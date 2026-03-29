@@ -1,4 +1,3 @@
-import * as Sentry from '@sentry/react'
 import {
   APP_ENV,
   APP_VERSION,
@@ -10,15 +9,15 @@ import {
   SENTRY_TRACES_SAMPLE_RATE,
 } from '../config/env'
 
+const HAS_BUILD_SENTRY_DSN = Boolean(import.meta.env.VITE_SENTRY_DSN)
 const IS_SENTRY_CONFIGURED =
-  typeof SENTRY_DSN === 'string' && SENTRY_DSN.trim().length > 0
+  HAS_BUILD_SENTRY_DSN && typeof SENTRY_DSN === 'string' && SENTRY_DSN.trim().length > 0
 
-export function initErrorMonitoring() {
-  if (!IS_PROD || !IS_SENTRY_CONFIGURED) {
-    return
-  }
+let sentryModulePromise = null
+let hasInitializedSentry = false
 
-  Sentry.init({
+function getSentryConfig() {
+  return {
     dsn: SENTRY_DSN,
     environment: SENTRY_ENVIRONMENT ?? APP_ENV,
     release: SENTRY_RELEASE || APP_VERSION,
@@ -32,20 +31,59 @@ export function initErrorMonitoring() {
 
       return event
     },
-  })
+  }
+}
+
+async function loadSentryModule() {
+  if (!HAS_BUILD_SENTRY_DSN || !IS_PROD || !IS_SENTRY_CONFIGURED) {
+    return null
+  }
+
+  if (!sentryModulePromise) {
+    sentryModulePromise = import('@sentry/browser').catch((error) => {
+      sentryModulePromise = null
+
+      if (IS_DEV) {
+        console.error('[monitoring] Failed to load Sentry module', error)
+      }
+
+      return null
+    })
+  }
+
+  return sentryModulePromise
+}
+
+async function ensureSentryInitialized() {
+  const Sentry = await loadSentryModule()
+
+  if (!Sentry || hasInitializedSentry) {
+    return Sentry
+  }
+
+  Sentry.init(getSentryConfig())
+  hasInitializedSentry = true
+
+  return Sentry
+}
+
+export function initErrorMonitoring() {
+  void ensureSentryInitialized()
 }
 
 export function captureException(error, context = {}) {
-  if (!IS_SENTRY_CONFIGURED) {
+  if (!IS_SENTRY_CONFIGURED || !IS_PROD) {
     if (IS_DEV) {
       console.error('[monitoring] Exception captured', error, context)
     }
     return
   }
 
-  Sentry.captureException(error, {
-    tags: context.tags,
-    extra: context.extra,
+  void ensureSentryInitialized().then((Sentry) => {
+    Sentry?.captureException(error, {
+      tags: context.tags,
+      extra: context.extra,
+    })
   })
 }
 
@@ -81,5 +119,3 @@ export function installGlobalErrorHandlers() {
     })
   })
 }
-
-export { Sentry }

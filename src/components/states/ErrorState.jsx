@@ -1,15 +1,13 @@
+import { useTranslation } from 'react-i18next'
 import StateScreen from './StateScreen'
 
-function ErrorState({
-  title = 'Ocurrio un error',
-  message = 'No pudimos completar la solicitud. Intenta de nuevo en unos minutos.',
-  actionLabel,
-  onAction,
-}) {
+function ErrorState({ title, message, actionLabel, onAction }) {
+  const { t } = useTranslation()
+
   return (
     <StateScreen
-      title={title}
-      message={message}
+      title={title ?? t('errors.general.title')}
+      message={message ?? t('errors.general.message')}
       variant="danger"
       icon="exclamation-triangle"
       actionLabel={actionLabel}
