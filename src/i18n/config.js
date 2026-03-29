@@ -3,15 +3,26 @@ import HttpBackend from 'i18next-http-backend'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import { initReactI18next } from 'react-i18next'
 import { IS_DEV, TRANSLATION_URL } from '../config/env'
-import { DEFAULT_LOCALE, getLocaleMeta } from './locales'
+import {
+  DEFAULT_LOCALE,
+  getLocaleMeta,
+  isSupportedLocale,
+  normalizeLocale,
+} from './locales'
 import { NAMESPACES, SUPPORTED_LOCALES } from './types'
+
+function resolveFallbackLocale(code) {
+  const normalizedLocale = normalizeLocale(code)
+  return isSupportedLocale(normalizedLocale) ? [normalizedLocale] : [DEFAULT_LOCALE]
+}
 
 i18n
   .use(LanguageDetector)
   .use(HttpBackend)
   .use(initReactI18next)
   .init({
-    fallbackLng: DEFAULT_LOCALE,
+    fallbackLng: resolveFallbackLocale,
+    load: 'languageOnly',
     supportedLngs: SUPPORTED_LOCALES,
     nonExplicitSupportedLngs: true,
 
