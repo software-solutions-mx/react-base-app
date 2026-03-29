@@ -7,7 +7,7 @@ import { HELP_PHONE_LABEL, HELP_PHONE_URI } from '../../config/env'
 import { organizationSchema, websiteSchema } from '../../data/schemas'
 import i18n from '../../i18n/config'
 import { DEFAULT_LOCALE, isSupportedLocale, normalizeLocale } from '../../i18n/locales'
-import { stripLocaleFromPath, toLocalizedPath } from '../../seo/siteConfig'
+import { normalizePath, stripLocaleFromPath } from '../../seo/siteConfig'
 
 function RootLayout() {
   const { t } = useTranslation()
@@ -69,13 +69,13 @@ function RootLayout() {
   }
 
   const routePath = stripLocaleFromPath(location.pathname)
-  const localizedSeoPath = toLocalizedPath(routePath, normalizedLocale)
+  const canonicalPath = normalizePath(location.pathname)
 
   return (
     <>
       <SEOHead
         locale={normalizedLocale}
-        path={localizedSeoPath}
+        path={canonicalPath}
         alternatePath={routePath}
         schema={[organizationSchema, websiteSchema]}
       />
