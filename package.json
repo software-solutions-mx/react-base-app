@@ -44,6 +44,9 @@
     ],
     "*.{json,md,html,yml,yaml}": "prettier --write"
   },
+  "overrides": {
+    "@joshwooding/vite-plugin-react-docgen-typescript": "0.7.0"
+  },
   "dependencies": {
     "@sentry/react": "^10.46.0",
     "@tanstack/react-query": "^5.95.2",
