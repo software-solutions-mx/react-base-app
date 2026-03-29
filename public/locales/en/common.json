@@ -1,7 +1,60 @@
 {
+  "brand": {
+    "name": "Software Solutions"
+  },
   "home": {
     "title": "Welcome",
     "message": "This is a basic i18n test page."
+  },
+  "a11y": {
+    "skipToMainContent": "Skip to main content",
+    "siteHeader": "Site header",
+    "siteFooter": "Site footer",
+    "mainContent": "Main content",
+    "routeUpdated": "Page updated"
+  },
+  "help": {
+    "immediate": "Immediate help"
+  },
+  "errors": {
+    "general": {
+      "title": "An error occurred",
+      "message": "We could not complete the request. Please try again in a few minutes."
+    },
+    "loading": {
+      "title": "Loading",
+      "message": "We are preparing the content..."
+    },
+    "notFound": {
+      "title": "Page not found",
+      "message": "The requested route does not exist or was moved."
+    },
+    "server": {
+      "title": "Internal server error",
+      "message": "We are working to resolve the issue as soon as possible."
+    },
+    "route": {
+      "notLoaded": "The requested route could not be loaded.",
+      "unexpectedTryAgain": "An unexpected error occurred. Please try again in a few minutes.",
+      "renderFailed": "Something went wrong while rendering this route."
+    },
+    "app": {
+      "unexpectedInApplication": "An unexpected error occurred in the application."
+    },
+    "actions": {
+      "retry": "Retry",
+      "backToHome": "Back to home"
+    }
+  },
+  "seo": {
+    "notFound": {
+      "title": "Page not found | Software Solutions",
+      "description": "The requested route does not exist."
+    },
+    "serverError": {
+      "title": "Server error | Software Solutions",
+      "description": "We are working to restore service."
+    }
   },
   "actions": {
     "switchToSpanish": "Switch to Spanish",

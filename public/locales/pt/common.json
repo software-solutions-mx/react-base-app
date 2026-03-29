@@ -1,10 +1,63 @@
 {
+  "brand": {
+    "name": "Software Solutions"
+  },
   "home": {
-    "title": "Welcome",
-    "message": "This is a basic i18n test page."
+    "title": "Bem-vindo",
+    "message": "Esta e uma pagina basica de teste para i18n."
+  },
+  "a11y": {
+    "skipToMainContent": "Ir para o conteudo principal",
+    "siteHeader": "Cabecalho do site",
+    "siteFooter": "Rodape do site",
+    "mainContent": "Conteudo principal",
+    "routeUpdated": "Pagina atualizada"
+  },
+  "help": {
+    "immediate": "Ajuda imediata"
+  },
+  "errors": {
+    "general": {
+      "title": "Ocorreu um erro",
+      "message": "Nao foi possivel concluir a solicitacao. Tente novamente em alguns minutos."
+    },
+    "loading": {
+      "title": "Carregando",
+      "message": "Estamos preparando o conteudo..."
+    },
+    "notFound": {
+      "title": "Pagina nao encontrada",
+      "message": "A rota solicitada nao existe ou foi movida."
+    },
+    "server": {
+      "title": "Erro interno do servidor",
+      "message": "Estamos trabalhando para resolver o problema o mais rapido possivel."
+    },
+    "route": {
+      "notLoaded": "A rota solicitada nao pode ser carregada.",
+      "unexpectedTryAgain": "Ocorreu um erro inesperado. Tente novamente em alguns minutos.",
+      "renderFailed": "Algo deu errado ao renderizar esta rota."
+    },
+    "app": {
+      "unexpectedInApplication": "Ocorreu um erro inesperado na aplicacao."
+    },
+    "actions": {
+      "retry": "Tentar novamente",
+      "backToHome": "Voltar ao inicio"
+    }
+  },
+  "seo": {
+    "notFound": {
+      "title": "Pagina nao encontrada | Software Solutions",
+      "description": "A rota solicitada nao existe."
+    },
+    "serverError": {
+      "title": "Erro do servidor | Software Solutions",
+      "description": "Estamos trabalhando para restaurar o servico."
+    }
   },
   "actions": {
-    "switchToSpanish": "Switch to Spanish",
-    "switchToEnglish": "Switch to English"
+    "switchToSpanish": "Mudar para espanhol",
+    "switchToEnglish": "Mudar para ingles"
   }
 }

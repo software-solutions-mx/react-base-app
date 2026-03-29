@@ -19,7 +19,7 @@ describe('App', () => {
   it('renders the main landmark', () => {
     render(<App />)
 
-    const mainLandmark = screen.getByRole('main', { name: /contenido principal/i })
+    const mainLandmark = screen.getByRole('main')
     expect(mainLandmark).toBeInTheDocument()
     expect(mainLandmark).toHaveAttribute('id', 'main-content')
     expect(mainLandmark).toHaveAttribute('tabindex', '-1')
@@ -28,9 +28,11 @@ describe('App', () => {
   it('renders a skip link pointing to the main content region', () => {
     render(<App />)
 
-    expect(
-      screen.getByRole('link', { name: /saltar al contenido principal/i }),
-    ).toHaveAttribute('href', '#main-content')
+    const skipLink = screen
+      .getAllByRole('link')
+      .find((element) => element.getAttribute('href') === '#main-content')
+
+    expect(skipLink).toBeDefined()
   })
 
   it('tracks the initial page view once', () => {

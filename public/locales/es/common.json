@@ -1,7 +1,60 @@
 {
+  "brand": {
+    "name": "Software Solutions"
+  },
   "home": {
     "title": "Bienvenido",
     "message": "Esta es una pagina basica de prueba para i18n."
+  },
+  "a11y": {
+    "skipToMainContent": "Saltar al contenido principal",
+    "siteHeader": "Encabezado del sitio",
+    "siteFooter": "Pie del sitio",
+    "mainContent": "Contenido principal",
+    "routeUpdated": "Pagina actualizada"
+  },
+  "help": {
+    "immediate": "Ayuda inmediata"
+  },
+  "errors": {
+    "general": {
+      "title": "Ocurrio un error",
+      "message": "No pudimos completar la solicitud. Intenta de nuevo en unos minutos."
+    },
+    "loading": {
+      "title": "Cargando",
+      "message": "Estamos preparando el contenido..."
+    },
+    "notFound": {
+      "title": "Pagina no encontrada",
+      "message": "La ruta solicitada no existe o fue movida."
+    },
+    "server": {
+      "title": "Error interno del servidor",
+      "message": "Estamos trabajando para resolver el problema lo antes posible."
+    },
+    "route": {
+      "notLoaded": "La ruta solicitada no pudo cargarse.",
+      "unexpectedTryAgain": "Ocurrio un error inesperado. Intenta nuevamente en unos minutos.",
+      "renderFailed": "Ocurrio un error al renderizar esta ruta."
+    },
+    "app": {
+      "unexpectedInApplication": "Ocurrio un error inesperado en la aplicacion."
+    },
+    "actions": {
+      "retry": "Reintentar",
+      "backToHome": "Volver al inicio"
+    }
+  },
+  "seo": {
+    "notFound": {
+      "title": "Pagina no encontrada | Software Solutions",
+      "description": "La ruta solicitada no existe."
+    },
+    "serverError": {
+      "title": "Error del servidor | Software Solutions",
+      "description": "Estamos trabajando para restablecer el servicio."
+    }
   },
   "actions": {
     "switchToSpanish": "Cambiar a espanol",

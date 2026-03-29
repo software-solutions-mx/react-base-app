@@ -1,16 +1,19 @@
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import StateScreen from './StateScreen'
 
 function NotFoundState() {
+  const { t } = useTranslation()
+
   return (
     <StateScreen
-      title="Pagina no encontrada"
-      message="La ruta solicitada no existe o fue movida."
+      title={t('errors.notFound.title')}
+      message={t('errors.notFound.message')}
       variant="warning"
       icon="signpost-split"
     >
       <Link to="/" className="state-screen-action">
-        Volver al inicio
+        {t('errors.actions.backToHome')}
       </Link>
     </StateScreen>
   )

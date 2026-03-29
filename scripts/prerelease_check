@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-node "$(dirname "$0")/prerelease_check.mjs"
+node "$(dirname "$0")/prerelease_check.mjs" "$@"

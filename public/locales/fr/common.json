@@ -1,10 +1,63 @@
 {
+  "brand": {
+    "name": "Software Solutions"
+  },
   "home": {
-    "title": "Welcome",
-    "message": "This is a basic i18n test page."
+    "title": "Bienvenue",
+    "message": "Ceci est une page de test i18n de base."
+  },
+  "a11y": {
+    "skipToMainContent": "Aller au contenu principal",
+    "siteHeader": "En-tete du site",
+    "siteFooter": "Pied de page du site",
+    "mainContent": "Contenu principal",
+    "routeUpdated": "Page mise a jour"
+  },
+  "help": {
+    "immediate": "Aide immediate"
+  },
+  "errors": {
+    "general": {
+      "title": "Une erreur est survenue",
+      "message": "Nous n'avons pas pu terminer la requete. Reessayez dans quelques minutes."
+    },
+    "loading": {
+      "title": "Chargement",
+      "message": "Nous preparons le contenu..."
+    },
+    "notFound": {
+      "title": "Page introuvable",
+      "message": "La route demandee n'existe pas ou a ete deplacee."
+    },
+    "server": {
+      "title": "Erreur interne du serveur",
+      "message": "Nous travaillons a resoudre le probleme des que possible."
+    },
+    "route": {
+      "notLoaded": "La route demandee n'a pas pu etre chargee.",
+      "unexpectedTryAgain": "Une erreur inattendue est survenue. Reessayez dans quelques minutes.",
+      "renderFailed": "Un probleme est survenu pendant le rendu de cette route."
+    },
+    "app": {
+      "unexpectedInApplication": "Une erreur inattendue est survenue dans l'application."
+    },
+    "actions": {
+      "retry": "Reessayer",
+      "backToHome": "Retour a l'accueil"
+    }
+  },
+  "seo": {
+    "notFound": {
+      "title": "Page introuvable | Software Solutions",
+      "description": "La route demandee n'existe pas."
+    },
+    "serverError": {
+      "title": "Erreur serveur | Software Solutions",
+      "description": "Nous travaillons a retablir le service."
+    }
   },
   "actions": {
-    "switchToSpanish": "Switch to Spanish",
-    "switchToEnglish": "Switch to English"
+    "switchToSpanish": "Passer en espagnol",
+    "switchToEnglish": "Passer en anglais"
   }
 }

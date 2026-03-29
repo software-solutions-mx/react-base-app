@@ -17,7 +17,7 @@ describe('App accessibility', () => {
     render(<App />)
 
     expect(screen.getByRole('banner')).toBeInTheDocument()
-    expect(screen.getByRole('main', { name: /contenido principal/i })).toBeInTheDocument()
+    expect(screen.getByRole('main')).toBeInTheDocument()
     expect(screen.getByRole('contentinfo')).toBeInTheDocument()
   })
 })

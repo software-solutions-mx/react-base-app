@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import ErrorState from '../../components/states/ErrorState'
+import i18n from '../../i18n/config'
 import { captureException } from '../../monitoring/sentry'
 
 class AppErrorBoundary extends Component {
@@ -23,7 +24,7 @@ class AppErrorBoundary extends Component {
 
   render() {
     if (this.state.hasError) {
-      return <ErrorState message="Ocurrio un error inesperado en la aplicacion." />
+      return <ErrorState message={i18n.t('errors.app.unexpectedInApplication')} />
     }
 
     return this.props.children

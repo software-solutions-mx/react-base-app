@@ -3,7 +3,7 @@ import HttpBackend from 'i18next-http-backend'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import { initReactI18next } from 'react-i18next'
 import { IS_DEV, TRANSLATION_URL } from '../config/env'
-import { getLocaleMeta } from './locales'
+import { DEFAULT_LOCALE, getLocaleMeta } from './locales'
 import { NAMESPACES, SUPPORTED_LOCALES } from './types'
 
 i18n
@@ -11,7 +11,7 @@ i18n
   .use(HttpBackend)
   .use(initReactI18next)
   .init({
-    fallbackLng: 'en',
+    fallbackLng: DEFAULT_LOCALE,
     supportedLngs: SUPPORTED_LOCALES,
     nonExplicitSupportedLngs: true,
 
@@ -31,11 +31,8 @@ i18n
     },
 
     detection: {
-      order: ['querystring', 'cookie', 'localStorage', 'navigator', 'htmlTag'],
-      lookupQuerystring: 'lng',
-      lookupCookie: 'locale',
-      lookupLocalStorage: 'i18n_lang',
-      caches: ['localStorage', 'cookie'],
+      order: ['navigator', 'htmlTag'],
+      caches: [],
     },
 
     react: {

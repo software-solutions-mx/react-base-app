@@ -16,6 +16,7 @@ storybook-static
 test-results
 playwright-report
 blob-report
+tmp
 
 # Editor directories and files
 .vscode/*
@@ -27,3 +28,7 @@ blob-report
 *.njsproj
 *.sln
 *.sw?
+
+# Keep this architecture guide trackable even with a global "Documents" ignore rule.
+!documents/
+!documents/react-i18n-architecture.md
