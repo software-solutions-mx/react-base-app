@@ -1,7 +1,4 @@
 {
-  "brand": {
-    "name": "Software Solutions"
-  },
   "home": {
     "title": "Bienvenue",
     "message": "Ceci est une page de test i18n de base."
@@ -48,11 +45,11 @@
   },
   "seo": {
     "notFound": {
-      "title": "Page introuvable | Software Solutions",
+      "title": "Page introuvable",
       "description": "La route demandee n'existe pas."
     },
     "serverError": {
-      "title": "Erreur serveur | Software Solutions",
+      "title": "Erreur serveur",
       "description": "Nous travaillons a retablir le service."
     }
   },

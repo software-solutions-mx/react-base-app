@@ -1,7 +1,4 @@
 {
-  "brand": {
-    "name": "Software Solutions"
-  },
   "home": {
     "title": "Welcome",
     "message": "This is a basic i18n test page."
@@ -48,11 +45,11 @@
   },
   "seo": {
     "notFound": {
-      "title": "Page not found | Software Solutions",
+      "title": "Page not found",
       "description": "The requested route does not exist."
     },
     "serverError": {
-      "title": "Server error | Software Solutions",
+      "title": "Server error",
       "description": "We are working to restore service."
     }
   },

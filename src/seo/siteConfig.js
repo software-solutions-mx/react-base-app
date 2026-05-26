@@ -6,30 +6,26 @@ import {
   normalizeLocale,
 } from '../i18n/locales'
 
-export const SITE_NAME = 'Software Solutions'
+export const SITE_NAME = 'React Base App'
 export const SITE_URL = ENV_SITE_URL
 export const SITE_LOCALE = LOCALE_META[DEFAULT_LOCALE].ogLocale
 
 const SEO_DEFAULTS_BY_LOCALE = {
   es: {
-    title: 'Desarrollo de Software a la Medida en México | Software Solutions',
-    description:
-      'Software Solutions: desarrollamos aplicaciones web, sistemas empresariales y software personalizado para empresas en México. Cotización sin costo.',
+    title: 'React Base App',
+    description: 'Aplicacion base React.',
   },
   en: {
-    title: 'Custom Software Development in Mexico | Software Solutions',
-    description:
-      'Software Solutions builds custom business systems, web applications, and scalable digital products for companies operating in Mexico.',
+    title: 'React Base App',
+    description: 'React base application.',
   },
   fr: {
-    title: 'Developpement Logiciel Sur Mesure au Mexique | Software Solutions',
-    description:
-      'Software Solutions developpe des applications web et des logiciels metier sur mesure pour les entreprises au Mexique.',
+    title: 'React Base App',
+    description: 'Application de base React.',
   },
   pt: {
-    title: 'Desenvolvimento de Software Sob Medida no Mexico | Software Solutions',
-    description:
-      'A Software Solutions desenvolve sistemas empresariais e aplicacoes web sob medida para empresas no Mexico.',
+    title: 'React Base App',
+    description: 'Aplicacao base React.',
   },
 }
 
@@ -83,7 +79,7 @@ export function getSeoDefaults(locale = DEFAULT_LOCALE) {
 
   return {
     ...localizedDefaults,
-    ogImage: `${SITE_URL}/og/og-default.svg`,
+    ogImage: null,
     twitterCard: 'summary_large_image',
   }
 }

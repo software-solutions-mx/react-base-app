@@ -121,9 +121,15 @@ function SEOHead({
     setMetaByProperty('og:title', resolvedTitle)
     setMetaByProperty('og:description', resolvedDescription)
     setMetaByProperty('og:url', canonicalUrl)
-    setMetaByProperty('og:image', resolvedOgImage)
-    setMetaByProperty('og:image:width', '1200')
-    setMetaByProperty('og:image:height', '630')
+    if (resolvedOgImage) {
+      setMetaByProperty('og:image', resolvedOgImage)
+      setMetaByProperty('og:image:width', '1200')
+      setMetaByProperty('og:image:height', '630')
+    } else {
+      removeByKey('meta:property:og:image')
+      removeByKey('meta:property:og:image:width')
+      removeByKey('meta:property:og:image:height')
+    }
 
     removeByPrefix('meta:property:og:locale:alternate:')
     alternateUrls.links
@@ -135,7 +141,11 @@ function SEOHead({
     setMetaByName('twitter:card', localeDefaults.twitterCard)
     setMetaByName('twitter:title', resolvedTitle)
     setMetaByName('twitter:description', resolvedDescription)
-    setMetaByName('twitter:image', resolvedOgImage)
+    if (resolvedOgImage) {
+      setMetaByName('twitter:image', resolvedOgImage)
+    } else {
+      removeByKey('meta:name:twitter:image')
+    }
 
     if (googleSiteVerification) {
       setMetaByName('google-site-verification', googleSiteVerification)

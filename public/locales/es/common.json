@@ -1,7 +1,4 @@
 {
-  "brand": {
-    "name": "Software Solutions"
-  },
   "home": {
     "title": "Bienvenido",
     "message": "Esta es una pagina basica de prueba para i18n."
@@ -48,11 +45,11 @@
   },
   "seo": {
     "notFound": {
-      "title": "Pagina no encontrada | Software Solutions",
+      "title": "Pagina no encontrada",
       "description": "La ruta solicitada no existe."
     },
     "serverError": {
-      "title": "Error del servidor | Software Solutions",
+      "title": "Error del servidor",
       "description": "Estamos trabajando para restablecer el servicio."
     }
   },

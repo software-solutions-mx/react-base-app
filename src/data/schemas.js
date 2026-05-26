@@ -5,7 +5,6 @@ export const organizationSchema = {
   '@type': 'Organization',
   name: SITE_NAME,
   url: SITE_URL,
-  logo: `${SITE_URL}/og/og-default.svg`,
 }
 
 export const websiteSchema = {
