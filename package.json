@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "local": "npm run dev -- --host",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "build": "vite build",
@@ -30,19 +31,7 @@
     "seo:validate": "./scripts/validate-seo.sh",
     "prerelease_check": "node ./scripts/prerelease_check.mjs",
     "release": "semantic-release",
-    "release:dry-run": "semantic-release --dry-run",
-    "prepare": "husky"
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx,mjs,cjs}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.{css,scss}": [
-      "stylelint --fix",
-      "prettier --write"
-    ],
-    "*.{json,md,html,yml,yaml}": "prettier --write"
+    "release:dry-run": "semantic-release --dry-run"
   },
   "overrides": {
     "@joshwooding/vite-plugin-react-docgen-typescript": "0.7.0"
@@ -64,8 +53,6 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@commitlint/cli": "^20.5.0",
-    "@commitlint/config-conventional": "^20.5.0",
     "@emnapi/core": "^1.9.1",
     "@emnapi/runtime": "^1.9.1",
     "@eslint/js": "^9.39.4",
@@ -91,9 +78,7 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.4.0",
-    "husky": "^9.1.7",
     "jsdom": "^29.0.1",
-    "lint-staged": "^16.4.0",
     "prettier": "^3.8.1",
     "sass": "^1.98.0",
     "semantic-release": "^25.0.3",
