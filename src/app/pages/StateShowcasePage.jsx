@@ -20,7 +20,7 @@ function StateShowcasePage() {
         noindex
       />
       <div className="state-showcase">
-        <LoadingState />
+        <LoadingState fullscreen={false} />
         <EmptyState />
         <ErrorState />
         <NotFoundState />

@@ -23,7 +23,8 @@
     },
     "loading": {
       "title": "Chargement",
-      "message": "Nous preparons le contenu..."
+      "message": "Nous preparons le contenu...",
+      "label": "chargement..."
     },
     "notFound": {
       "title": "Page introuvable",
