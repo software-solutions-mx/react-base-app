@@ -33,3 +33,4 @@ tmp
 !documents/
 !documents/react-i18n-architecture.md
 scripts/prerelease_check_results.json
+.env

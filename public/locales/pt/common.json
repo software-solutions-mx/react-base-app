@@ -20,7 +20,8 @@
     },
     "loading": {
       "title": "Carregando",
-      "message": "Estamos preparando o conteudo..."
+      "message": "Estamos preparando o conteudo...",
+      "label": "carregando..."
     },
     "notFound": {
       "title": "Pagina nao encontrada",

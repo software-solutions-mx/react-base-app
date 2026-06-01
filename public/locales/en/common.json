@@ -20,7 +20,8 @@
     },
     "loading": {
       "title": "Loading",
-      "message": "We are preparing the content..."
+      "message": "We are preparing the content...",
+      "label": "loading..."
     },
     "notFound": {
       "title": "Page not found",
